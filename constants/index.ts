@@ -1,6 +1,6 @@
 // NAVIGATION
 export const NAV_LINKS = [
-  { href: "#hero", key: "home", label: "Home", ref: "hero" },
+  { href: "#", key: "home", label: "Home", ref: "hero" },
   {
     href: "#camp",
     key: "hilink_camping",
