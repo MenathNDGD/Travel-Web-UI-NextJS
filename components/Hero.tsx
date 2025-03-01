@@ -15,7 +15,9 @@ const Hero = () => {
           height={50}
           className="absolute left-[-5px] top-[-35px] sm:top-[-42px] w-10 lg:w-[50px]"
         />
-        <h1 className="bold-52 lg:bold-88">Putuk Truno Camp Area</h1>
+        <h1 className="bold-52 lg:text-[88px] lg:font-[700] lg:leading-[120%]">
+          Putuk Truno Camp Area
+        </h1>
         <p className="regular-16 mt-6 text-gray-30 xl:max-w-[520px]">
           We want to be on each of your journeys seeking the satisfaction of
           seeing the incorruptible beauty of nature. We can help you on an
@@ -37,9 +39,9 @@ const Hero = () => {
               ))}
           </div>
 
-          <p className="bold-16 lg:bold-20 text-blue-70">
+          <p className="bold-16 lg:text-[20px] lg:font-[700] text-blue-70">
             198K{" "}
-            <span className="regular-16 lg:regular-20 ml-1">
+            <span className="regular-16 lg:text-[20px] lg:font-[400] ml-1">
               Excellent User Reviews!
             </span>
           </p>
