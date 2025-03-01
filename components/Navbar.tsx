@@ -26,6 +26,15 @@ const Navbar = () => {
             href={link.href}
             key={link.key}
             className="regular-16 text-gray-50 flexCenter cursor-pointer pb-1.5 transition-all hover:font-bold"
+            onClick={(e) => {
+              if (link.ref) {
+                e.preventDefault();
+                const section = document.getElementById(link.ref);
+                if (section) {
+                  section.scrollIntoView({ behavior: "smooth" });
+                }
+              }
+            }}
           >
             {link.label}
           </Link>
@@ -77,7 +86,16 @@ const Navbar = () => {
               href={link.href}
               key={link.key}
               className="regular-16 text-gray-50 flexCenter cursor-pointer pb-1.5 py-3 transition-all hover:font-bold"
-              onClick={toggleMenu}
+              onClick={(e) => {
+                if (link.ref) {
+                  e.preventDefault();
+                  const section = document.getElementById(link.ref);
+                  if (section) {
+                    section.scrollIntoView({ behavior: "smooth" });
+                  }
+                }
+                toggleMenu();
+              }}
             >
               {link.label}
             </Link>
