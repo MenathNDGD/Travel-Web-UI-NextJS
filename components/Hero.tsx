@@ -1,10 +1,15 @@
+"use client";
+
 import Image from "next/image";
 
 import Button from "./Button";
 
 const Hero = () => {
   return (
-    <section className="max-container padding-container flex flex-col gap-20 py-10 pb-32 md:gap-28 lg:py-20 xl:flex-row">
+    <section
+      id="hero"
+      className="max-container padding-container flex flex-col gap-20 py-10 pb-32 md:gap-28 lg:py-20 xl:flex-row"
+    >
       <div className="hero-map" />
 
       <div className="relative z-20 flex flex-1 flex-col xl:w-1/2">
@@ -48,12 +53,24 @@ const Hero = () => {
         </div>
 
         <div className="flex flex-col w-full gap-3 sm:flex-row">
-          <Button type="button" title="Download App" variant="btn_green" />
+          <Button
+            type="button"
+            title="Download App"
+            variant="btn_green"
+            onClick={() => {
+              const section = document.getElementById("get-app");
+              section?.scrollIntoView({ behavior: "smooth" });
+            }}
+          />
           <Button
             type="button"
             title="How We Work?"
             icon="/play.svg"
             variant="btn_white_text"
+            onClick={() => {
+              const section = document.getElementById("guide");
+              section?.scrollIntoView({ behavior: "smooth" });
+            }}
           />
         </div>
       </div>
