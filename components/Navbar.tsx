@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,13 +9,45 @@ import Button from "./Button";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll("[id]");
+      const fromTop = window.scrollY;
+
+      sections.forEach((section) => {
+        const sectionTop = (section as HTMLElement).offsetTop;
+        const sectionHeight = (section as HTMLElement).offsetHeight;
+
+        if (fromTop >= sectionTop && fromTop < sectionTop + sectionHeight) {
+          setActiveSection(section.id);
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const scrollToSection = (id: string, offset = 0) => {
+    const section = document.getElementById(id);
+    if (section) {
+      const rect = section.getBoundingClientRect();
+      const offsetTop = rect.top + window.scrollY + offset;
+      window.scrollTo({ top: offsetTop, behavior: "smooth" });
+    }
+  };
+
   return (
-    <nav className="flexBetween max-container padding-container relative z-30 py-5">
+    <nav className="flexBetween max-container padding-container z-30 py-5 sticky top-0 bg-white">
       <Link href={"/"}>
         <Image src={"/hilink-logo.svg"} alt="Logo" width={74} height={29} />
       </Link>
@@ -25,14 +57,14 @@ const Navbar = () => {
           <Link
             href={link.href}
             key={link.key}
-            className="regular-16 text-gray-50 flexCenter cursor-pointer pb-1.5 transition-all hover:font-bold"
+            className={`regular-16 text-gray-50 flexCenter cursor-pointer pb-1.5 transition-all ${
+              activeSection === link.ref ? "text-green-50 font-extrabold" : ""
+            }`}
             onClick={(e) => {
               if (link.ref) {
                 e.preventDefault();
-                const section = document.getElementById(link.ref);
-                if (section) {
-                  section.scrollIntoView({ behavior: "smooth" });
-                }
+                const navbarHeight = 80;
+                scrollToSection(link.ref, -navbarHeight);
               }
             }}
           >
@@ -85,14 +117,14 @@ const Navbar = () => {
             <Link
               href={link.href}
               key={link.key}
-              className="regular-16 text-gray-50 flexCenter cursor-pointer pb-1.5 py-3 transition-all hover:font-bold"
+              className={`regular-16 text-gray-50 flexCenter cursor-pointer pb-1.5 py-3 transition-all ${
+                activeSection === link.ref ? "text-green-50 font-bold" : ""
+              }`}
               onClick={(e) => {
                 if (link.ref) {
                   e.preventDefault();
-                  const section = document.getElementById(link.ref);
-                  if (section) {
-                    section.scrollIntoView({ behavior: "smooth" });
-                  }
+                  const navbarHeight = 90;
+                  scrollToSection(link.ref, -navbarHeight);
                 }
                 toggleMenu();
               }}
