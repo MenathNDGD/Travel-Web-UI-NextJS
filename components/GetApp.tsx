@@ -4,7 +4,7 @@ import Button from "./Button";
 
 const GetApp = () => {
   return (
-    <section className="flexCenter w-full flex-col pb-[100px]">
+    <section id="get-app" className="flexCenter w-full flex-col pb-[100px]">
       <div className="get-app">
         <div className="z-20 flex w-full flex-1 flex-col items-start justify-center gap-12">
           <h2 className="bold-40 lg:text-[64px] lg:font-[700] lg:leading-[120%] xl:max-w-[320px] capitalize">
